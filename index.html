@@ -2,27 +2,30 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>모바일 청첩장</title>
-  <meta name="description" content="모바일 웨딩 청첩장 템플릿" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>김성휘 · 김설매 모바일 청첩장</title>
+  <meta name="description" content="김성휘 · 김설매 결혼식에 초대합니다." />
   <style>
     :root {
-      --bg: #f8f5f1;
-      --paper: rgba(255, 255, 255, 0.72);
-      --paper-strong: rgba(255, 255, 255, 0.92);
-      --text: #3f372f;
-      --muted: #7a6c60;
-      --point: #b4876c;
-      --point-soft: #eadccf;
-      --line: rgba(122, 108, 96, 0.18);
-      --shadow: 0 18px 40px rgba(60, 42, 24, 0.08);
+      --bg: #fffaf7;
+      --bg-soft: #f8f1eb;
+      --paper: rgba(255,255,255,0.72);
+      --text: #6f5448;
+      --text-soft: #9a7d70;
+      --line: rgba(191, 163, 135, 0.25);
+      --point: #c7a48d;
+      --point-deep: #a87f67;
+      --shadow: 0 18px 50px rgba(114, 76, 58, 0.10);
       --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-      --max: 720px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 540px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -30,20 +33,12 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.9), transparent 34%),
-        linear-gradient(180deg, #f9f6f2 0%, #f3ede7 100%);
+        radial-gradient(circle at top, rgba(255, 232, 238, 0.7), transparent 35%),
+        linear-gradient(180deg, #fffdfb 0%, #fff8f3 35%, #fffaf7 100%);
       color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      word-break: keep-all;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-      object-fit: cover;
+      overflow-x: hidden;
     }
 
     a {
@@ -51,580 +46,749 @@
       text-decoration: none;
     }
 
-    .wrap {
-      width: min(calc(100% - 24px), var(--max));
-      margin: 0 auto;
-      padding: 16px 0 56px;
+    .petals,
+    .petals::before,
+    .petals::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      content: "";
     }
 
-    .section {
-      margin-top: 18px;
-      padding: 28px 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      background: var(--paper);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
+    .petals {
+      background-image:
+        radial-gradient(10px 7px at 10% 8%, rgba(255, 209, 220, 0.80) 0 60%, transparent 62%),
+        radial-gradient(9px 6px at 28% 18%, rgba(255, 220, 228, 0.70) 0 60%, transparent 62%),
+        radial-gradient(11px 8px at 48% 10%, rgba(255, 214, 224, 0.78) 0 60%, transparent 62%),
+        radial-gradient(8px 6px at 63% 24%, rgba(255, 224, 232, 0.65) 0 60%, transparent 62%),
+        radial-gradient(10px 7px at 82% 14%, rgba(255, 207, 220, 0.78) 0 60%, transparent 62%),
+        radial-gradient(9px 6px at 92% 7%, rgba(255, 227, 235, 0.72) 0 60%, transparent 62%);
+      animation: petalsFallA 18s linear infinite;
+      opacity: .75;
+    }
+
+    .petals::before {
+      background-image:
+        radial-gradient(10px 7px at 14% 0%, rgba(255, 207, 220, 0.55) 0 60%, transparent 62%),
+        radial-gradient(8px 6px at 35% 12%, rgba(255, 229, 235, 0.55) 0 60%, transparent 62%),
+        radial-gradient(10px 7px at 54% 2%, rgba(255, 213, 223, 0.65) 0 60%, transparent 62%),
+        radial-gradient(9px 6px at 70% 16%, rgba(255, 230, 237, 0.55) 0 60%, transparent 62%),
+        radial-gradient(10px 7px at 87% 8%, rgba(255, 214, 224, 0.60) 0 60%, transparent 62%);
+      animation: petalsFallB 24s linear infinite;
+      opacity: .55;
+    }
+
+    .petals::after {
+      background-image:
+        radial-gradient(8px 6px at 8% 16%, rgba(255, 223, 231, 0.45) 0 60%, transparent 62%),
+        radial-gradient(10px 7px at 24% 4%, rgba(255, 204, 218, 0.45) 0 60%, transparent 62%),
+        radial-gradient(9px 6px at 58% 12%, rgba(255, 221, 230, 0.48) 0 60%, transparent 62%),
+        radial-gradient(10px 7px at 76% 0%, rgba(255, 211, 222, 0.45) 0 60%, transparent 62%),
+        radial-gradient(8px 6px at 96% 10%, rgba(255, 228, 235, 0.42) 0 60%, transparent 62%);
+      animation: petalsFallC 30s linear infinite;
+      opacity: .45;
+    }
+
+    @keyframes petalsFallA {
+      from { transform: translateY(-5%) translateX(0); }
+      to   { transform: translateY(105%) translateX(-12px); }
+    }
+
+    @keyframes petalsFallB {
+      from { transform: translateY(-12%) translateX(10px); }
+      to   { transform: translateY(108%) translateX(-18px); }
+    }
+
+    @keyframes petalsFallC {
+      from { transform: translateY(-15%) translateX(-8px); }
+      to   { transform: translateY(110%) translateX(16px); }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 18px 60px;
     }
 
     .hero {
-      padding: 0;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-image {
-      aspect-ratio: 4 / 5.1;
-      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.22)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80') center/cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 0 40px;
     }
 
     .hero-card {
       position: relative;
-      margin: -78px 16px 16px;
-      background: rgba(255,255,255,0.88);
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 26px;
-      padding: 28px 20px 24px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(40, 26, 12, 0.12);
+      width: 100%;
+      min-height: calc(100vh - 48px);
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #f3e8e1;
     }
 
-    .eyebrow {
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      animation: heroFloat 9s ease-in-out infinite alternate;
+      filter: saturate(1.02);
+    }
+
+    @keyframes heroFloat {
+      from { transform: scale(1.05) translate3d(0, 0, 0); }
+      to   { transform: scale(1.10) translate3d(-8px, -8px, 0); }
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.12) 26%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.86) 100%);
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: absolute;
+      left: 50%;
+      bottom: 10%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: calc(100% - 36px);
+      text-align: center;
+    }
+
+    .hero-kicker {
+      margin: 0 0 10px;
       font-size: 12px;
-      letter-spacing: 0.24em;
-      color: var(--muted);
+      letter-spacing: 0.28em;
+      color: #9a7368;
       text-transform: uppercase;
-      margin-bottom: 10px;
     }
 
     .hero-title {
-      font-size: 30px;
-      letter-spacing: 0.06em;
-      line-height: 1.35;
       margin: 0;
-      font-weight: 500;
+      font-size: 1.8rem;
+      line-height: 1.35;
+      font-weight: 600;
+      color: #6d5045;
     }
 
     .hero-sub {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 15px;
+      display: inline-block;
+      margin-top: 16px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.28);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 24px rgba(95, 66, 52, 0.12);
+    }
+
+    .section {
+      position: relative;
+      padding: 56px 0 10px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius-xl);
+      padding: 30px 22px;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.24), transparent 40%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 1.55rem;
+      line-height: 1.4;
+      font-weight: 700;
+      color: var(--point-deep);
+      text-align: center;
     }
 
     .divider {
-      width: 40px;
+      width: 56px;
       height: 1px;
-      background: rgba(122, 108, 96, 0.3);
-      margin: 16px auto;
+      margin: 18px auto 20px;
+      background: linear-gradient(to right, transparent, rgba(167,127,103,0.8), transparent);
     }
 
-    .section-title {
-      text-align: center;
-      margin: 0 0 16px;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-
-    .section-kicker {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 8px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .message {
+    .body {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.95;
       text-align: center;
       color: var(--text);
-      font-size: 15px;
-      white-space: pre-line;
+      word-break: keep-all;
     }
 
-    .family-box {
+    .split-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
     }
 
-    .family-item {
-      padding: 16px;
-      border-radius: var(--radius-lg);
+    .split-box {
+      background: rgba(255,255,255,0.62);
       border: 1px solid var(--line);
-      background: var(--paper-strong);
+      border-radius: 24px;
+      padding: 24px 18px;
       text-align: center;
     }
 
-    .label {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      letter-spacing: 0.12em;
-    }
-
-    .name {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .calendar-card {
+    .split-box.align-left {
       text-align: center;
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,245,240,0.96));
-      border: 1px solid var(--line);
     }
 
-    .day {
-      font-size: 40px;
-      line-height: 1;
+    .mini-label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      letter-spacing: .04em;
+    }
+
+    .mini-label.left {
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .split-main {
+      font-size: 1.05rem;
+      line-height: 1.75;
       font-weight: 700;
-      color: var(--point);
-      margin: 8px 0;
+      color: #4f433b;
+      word-break: keep-all;
     }
 
-    .info-grid {
+    .split-sub {
+      margin-top: 8px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 700;
+      color: #4f433b;
+    }
+
+    .day-highlight {
+      margin-top: 14px;
+      padding: 28px 20px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.60);
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .day-month {
+      font-size: 0.95rem;
+      color: #5a4b42;
+      margin-bottom: 10px;
+    }
+
+    .day-date {
+      font-size: 4rem;
+      line-height: 1;
+      font-weight: 800;
+      color: #b88767;
+      margin-bottom: 12px;
+    }
+
+    .day-time {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #4f433b;
+    }
+
+    .bottom-info-grid {
+      margin-top: 22px;
+    }
+
+    .place-title {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 700;
+      color: #5a4b42;
+      margin-bottom: 6px;
+      word-break: keep-all;
+      text-align: center;
+    }
+
+    .place-desc,
+    .contact-line {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #5a4b42;
+      word-break: keep-all;
+      text-align: center;
+    }
+
+    .info-box {
       display: grid;
       gap: 12px;
-      margin-top: 14px;
+      margin-top: 20px;
     }
 
-    .info-item {
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      background: var(--paper-strong);
+    .info-row {
+      background: rgba(255,255,255,0.62);
       border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      text-align: center;
     }
 
-    .info-item strong {
+    .info-label {
       display: block;
       margin-bottom: 6px;
-      font-size: 14px;
-      color: var(--muted);
+      font-size: 12px;
+      color: var(--text-soft);
+      letter-spacing: .08em;
+    }
+
+    .info-value {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--point-deep);
       font-weight: 600;
+      word-break: keep-all;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    .venue-address {
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.8;
+      color: var(--text);
+      font-size: 0.97rem;
     }
 
-    .gallery button {
-      padding: 0;
-      border: 0;
-      background: transparent;
-      border-radius: 18px;
+    .gallery-intro {
+      margin: 0 auto 22px;
+      text-align: center;
+      color: var(--text-soft);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      max-width: 290px;
+    }
+
+    .gallery-slider {
+      position: relative;
+      margin-top: 8px;
       overflow: hidden;
-      box-shadow: 0 10px 24px rgba(40, 26, 12, 0.08);
-      cursor: pointer;
     }
 
-    .gallery img {
-      aspect-ratio: 1 / 1.15;
-      transition: transform .35s ease;
+    .gallery-track {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 2px 12px;
+      scrollbar-width: none;
     }
 
-    .gallery button:hover img,
-    .gallery button:active img {
-      transform: scale(1.03);
+    .gallery-track::-webkit-scrollbar {
+      display: none;
     }
 
-    .map-box {
-      overflow: hidden;
+    .gallery-slide {
+      position: relative;
+      flex: 0 0 82%;
+      aspect-ratio: 1 / 1.28;
       border-radius: 20px;
-      border: 1px solid var(--line);
-      background: #f1ebe5;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f4e6df 0%, #f9f2ed 100%);
+      box-shadow: 0 8px 24px rgba(115, 83, 66, 0.08);
+      border: 1px solid rgba(255,255,255,0.7);
+      scroll-snap-align: center;
     }
 
-    .map-box iframe {
+    .gallery-slide img {
       width: 100%;
-      height: 280px;
-      border: 0;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
-    .button-row {
+    .gallery-slide.placeholder::before {
+      content: "PHOTO";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: .35em;
+      color: #b29384;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.08)),
+        radial-gradient(circle at top left, rgba(255,220,228,0.8), transparent 44%),
+        radial-gradient(circle at bottom right, rgba(247,230,220,0.9), transparent 42%);
+    }
+
+    .gallery-hint {
+      margin: 10px 0 0;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-soft);
+    }
+
+    .gallery-slide.placeholder::before {
+      content: "PHOTO";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: .35em;
+      color: #b29384;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.08)),
+        radial-gradient(circle at top left, rgba(255,220,228,0.8), transparent 44%),
+        radial-gradient(circle at bottom right, rgba(247,230,220,0.9), transparent 42%);
+    }
+
+    .single-center-grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .wedding-summary-box {
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .map-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 12px;
+      margin-top: 22px;
     }
 
     .btn {
-      display: inline-flex;
-      justify-content: center;
+      display: flex;
       align-items: center;
-      min-height: 48px;
-      padding: 12px 14px;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 18px;
       border-radius: 999px;
-      border: 1px solid transparent;
-      background: var(--text);
+      background: linear-gradient(180deg, #d9b9a6 0%, #c69e85 100%);
       color: #fff;
-      font-size: 14px;
       font-weight: 600;
+      box-shadow: 0 10px 22px rgba(160, 117, 92, 0.22);
     }
 
     .btn.secondary {
-      background: rgba(255,255,255,0.9);
-      color: var(--text);
-      border-color: var(--line);
+      background: linear-gradient(180deg, #b8937f 0%, #9e7765 100%);
     }
 
-    .notice {
-      font-size: 14px;
-      color: var(--muted);
+    .transport-box {
+      margin-top: 18px;
+      padding: 18px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.66);
+      border: 1px solid var(--line);
+      line-height: 1.85;
+      font-size: 0.96rem;
       text-align: center;
-      margin-top: 10px;
+    }
+
+    .account-section-group {
+      margin-top: 22px;
+    }
+
+    .account-group-title {
+      margin: 0 0 14px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--point-deep);
+      letter-spacing: .04em;
     }
 
     .account-list {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     .account-item {
       display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: var(--paper-strong);
-    }
-
-    .account-text {
-      min-width: 0;
-    }
-
-    .account-text div:first-child {
-      font-weight: 600;
-    }
-
-    .account-text div:last-child {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 3px;
-    }
-
-    .copy-btn {
-      border: 0;
-      border-radius: 999px;
-      background: var(--point-soft);
-      color: #6d4f3d;
-      padding: 10px 14px;
-      font-weight: 700;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-      padding: 28px 6px 0;
-    }
-
-    .fab-audio {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      z-index: 30;
-      border: 0;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      box-shadow: 0 14px 28px rgba(0,0,0,0.15);
-      background: rgba(63,55,47,0.92);
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(22, 18, 15, 0.88);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 40;
-    }
-
-    .lightbox.open {
-      display: flex;
-    }
-
-    .lightbox img {
-      max-width: 100%;
-      max-height: 82vh;
+      flex-direction: column;
+      gap: 6px;
+      padding: 16px;
       border-radius: 18px;
-      object-fit: contain;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+      text-align: center;
     }
 
-    .lightbox-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 42px;
-      height: 42px;
-      border: 0;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.16);
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
+    .account-name {
+      font-size: 0.94rem;
+      color: var(--text-soft);
     }
 
-    .guide-box {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(180, 135, 108, 0.08);
-      border: 1px dashed rgba(180, 135, 108, 0.35);
-      font-size: 13px;
-      color: #70594b;
-      white-space: pre-line;
+    .account-number {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--point-deep);
+      font-weight: 700;
+      letter-spacing: 0.03em;
     }
 
-    @media (min-width: 640px) {
-      .wrap { padding-top: 24px; }
-      .hero-title { font-size: 38px; }
-      .family-box { grid-template-columns: 1fr 1fr; }
-      .info-grid { grid-template-columns: 1fr 1fr; }
-      .gallery { grid-template-columns: repeat(3, 1fr); }
+    .ending {
+      padding-bottom: 28px;
+    }
+
+    .footer-space {
+      height: 24px;
+    }
+
+    @media (max-width: 520px) {
+      .split-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day-date {
+        font-size: 3.4rem;
+      }
+
+      .map-actions-3col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 541px) {
+      .wrap {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="section hero">
-      <div class="hero-image"></div>
+  <div class="petals"></div>
+
+  <main class="wrap">
+    <!-- 1페이지: 사진 -->
+    <section class="hero" id="cover">
       <div class="hero-card">
-        <div class="eyebrow">Wedding Invitation</div>
-        <h1 class="hero-title">김신랑 · 이신부</h1>
+        <img class="hero-image" src="./images/cover.jpg" alt="신랑 신부 메인 사진" />
+        <div class="hero-text">
+          <p class="hero-kicker">Wedding Invitation</p>
+          <h1 class="hero-title">김성휘 · 김설매</h1>
+          <div class="hero-sub">두 사람의 이야기가 시작됩니다</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2페이지: 인사 -->
+    <section class="section" id="greeting">
+      <div class="card">
+        <p class="eyebrow">Invitation</p>
+        <h2 class="title">우리 결혼합니다</h2>
         <div class="divider"></div>
-        <div class="hero-sub">
-          2026년 5월 00일 토요일 오후 00시 00분<br />
-          예식장 이름 · 홀 이름
-        </div>
+        <p class="body">
+          서로를 아끼고 이해하며<br />
+          같은 방향을 바라보며 걸어온 두 사람이<br /><br />
+          이제 부부의 이름으로<br />
+          새로운 계절을 시작하려 합니다.<br /><br />
+          소중한 걸음으로 함께해 주시어<br />
+          저희의 시작을 따뜻하게 축복해 주세요.
+        </p>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-kicker">Invite</div>
-      <h2 class="section-title">소중한 분들을 초대합니다</h2>
-      <div class="message">서로 다른 길을 걸어온 두 사람이
-이제 같은 방향을 바라보며 함께 걸어가려 합니다.
+    <!-- 3페이지: 예식 및 웨딩홀 안내 -->
+    <section class="section" id="wedding-info">
+      <div class="card">
+        <p class="eyebrow">Wedding Day</p>
+        <h2 class="title">예식 안내</h2>
+        <div class="divider"></div>
 
-기쁨으로 가득한 그날,
-귀한 걸음 하시어 따뜻한 축복으로 함께해 주시면
-더없는 기쁨이 되겠습니다.</div>
-    </section>
-
-    <section class="section">
-      <div class="section-kicker">Family</div>
-      <h2 class="section-title">혼주 안내</h2>
-      <div class="family-box">
-        <div class="family-item">
-          <div class="label">신랑측</div>
-          <div class="name">아버지 성함 · 어머니 성함의 아들 김신랑</div>
+        <div class="day-highlight">
+          <div class="day-month">2026년 5월</div>
+          <div class="day-date">17</div>
+          <div class="day-time">2026년 5월 17일(일) 오전 11시</div>
         </div>
-        <div class="family-item">
-          <div class="label">신부측</div>
-          <div class="name">아버지 성함 · 어머니 성함의 딸 이신부</div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="section-kicker">Wedding Day</div>
-      <h2 class="section-title">예식 안내</h2>
-      <div class="calendar-card">
-        <div>2026년 5월</div>
-        <div class="day">16</div>
-        <div>토요일 오후 1시 00분</div>
-      </div>
-
-      <div class="info-grid">
-        <div class="info-item">
-          <strong>예식장</strong>
-          서울시 ○○구 ○○로 00<br />
-          예식장 이름 3층 ○○홀
-        </div>
-        <div class="info-item">
-          <strong>연락처</strong>
-          신랑 010-0000-0000<br />
-          신부 010-0000-0000
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-kicker">Gallery</div>
-      <h2 class="section-title">우리의 순간</h2>
-      <div class="gallery">
-        <button type="button" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="갤러리 사진 1" /></button>
-        <button type="button" data-full="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="갤러리 사진 2" /></button>
-        <button type="button" data-full="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="갤러리 사진 3" /></button>
-        <button type="button" data-full="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1400&q=80"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=900&q=80" alt="갤러리 사진 4" /></button>
-        <button type="button" data-full="https://images.unsplash.com/photo-1522674164-adae974e01f1?auto=format&fit=crop&w=1400&q=80"><img src="https://images.unsplash.com/photo-1522674164-adae974e01f1?auto=format&fit=crop&w=900&q=80" alt="갤러리 사진 5" /></button>
-        <button type="button" data-full="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=80"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=80" alt="갤러리 사진 6" /></button>
-      </div>
-      <div class="guide-box">[수정 방법]
-사진은 현재 샘플 이미지입니다.
-원하는 사진 URL로 바꾸거나, GitHub Pages에 images 폴더를 만들고
-예: images/photo1.jpg 형태로 교체해서 사용하세요.</div>
-    </section>
-
-    <section class="section">
-      <div class="section-kicker">Location</div>
-      <h2 class="section-title">오시는 길</h2>
-      <div class="map-box">
-        <iframe
-          title="예식장 위치"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%8B%9C%EC%B2%AD&z=15&output=embed">
-        </iframe>
-      </div>
-      <div class="info-grid">
-        <div class="info-item">
-          <strong>지하철</strong>
-          2호선 ○○역 3번 출구 도보 5분
-        </div>
-        <div class="info-item">
-          <strong>주차</strong>
-          예식장 내 지하주차장 이용 가능
-        </div>
-      </div>
-      <div class="button-row">
-        <a class="btn" href="https://map.kakao.com/" target="_blank" rel="noopener noreferrer">카카오맵</a>
-        <a class="btn secondary" href="https://map.naver.com/" target="_blank" rel="noopener noreferrer">네이버지도</a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-kicker">Heart</div>
-      <h2 class="section-title">마음 전하실 곳</h2>
-      <div class="account-list">
-        <div class="account-item">
-          <div class="account-text">
-            <div>신랑측 계좌</div>
-            <div id="acc-groom">은행명 000-0000-0000-00 김신랑</div>
+        <div class="split-grid bottom-info-grid single-center-grid">
+          <div class="split-box wedding-summary-box">
+            <span class="mini-label left">예식 안내</span>
+            <div class="place-title">신도림 웨스턴베니비스</div>
+            <div class="place-desc">아스타홀 7층</div>
+            <div class="place-desc">2026년 5월 17일(일) 오전 11시</div>
+            <div class="place-desc">신랑 김성휘 · 신부 김설매</div>
           </div>
-          <button class="copy-btn" data-copy="은행명 000-0000-0000-00 김신랑">복사</button>
         </div>
-        <div class="account-item">
-          <div class="account-text">
-            <div>신부측 계좌</div>
-            <div id="acc-bride">은행명 000-0000-0000-00 이신부</div>
+      </div>
+    </section>
+
+    <!-- 5페이지: 웨딩 갤러리 -->
+    <section class="section" id="gallery">
+      <div class="card">
+        <p class="eyebrow">Gallery</p>
+        <h2 class="title">웨딩 갤러리</h2>
+        <div class="divider"></div>
+        <p class="gallery-intro">
+          총 20장 정도의 사진을 넣을 수 있도록<br />
+          모바일에서 자연스럽게 넘겨보는 슬라이드형 갤러리입니다.
+        </p>
+
+        <div class="gallery-slider" aria-label="웨딩 갤러리 슬라이드">
+          <div class="gallery-track">
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
+            <div class="gallery-slide placeholder"><img src="" alt="" style="display:none" /></div>
           </div>
-          <button class="copy-btn" data-copy="은행명 000-0000-0000-00 이신부">복사</button>
+        </div>
+
+        <p class="gallery-hint">좌우로 밀어서 사진을 넘겨보세요.</p>
+      </div>
+    </section>
+
+    <!-- 6페이지: 오시는 길 -->
+    <section class="section" id="location">
+      <div class="card">
+        <p class="eyebrow">Location</p>
+        <h2 class="title">오시는 길</h2>
+        <div class="divider"></div>
+
+        <div class="venue-name">신도림 웨스턴베니비스 · 아스타홀 7층</div>
+        <p class="venue-address">
+          서울 구로구 경인로 662<br />
+          아스타홀 7층으로 방문해 주세요.
+        </p>
+
+        <div class="map-actions">
+          <a class="btn" href="https://naver.me/53lK4SBz" target="_blank" rel="noopener noreferrer">네이버지도 보기</a>
+          <a class="btn secondary" href="https://place.map.kakao.com/18887815" target="_blank" rel="noopener noreferrer">카카오지도 보기</a>
+        </div>
+
+        <div class="transport-box">
+          지하철 이용 시 1호선 · 2호선 신도림역에서 이동 가능합니다.<br />
+          방문 전 지도 앱에서 <strong>신도림 웨스턴베니비스</strong>을 검색하시면<br />
+          보다 편하게 찾아오실 수 있습니다.
         </div>
       </div>
-      <div class="notice">계좌번호 영역은 삭제하고 연락처만 남겨도 깔끔합니다.</div>
     </section>
 
-    <section class="section">
-      <div class="section-kicker">Guide</div>
-      <h2 class="section-title">직접 수정할 부분</h2>
-      <div class="message" style="text-align:left; font-size:14px;">
-1. 신랑·신부 이름
-2. 예식 날짜 / 시간 / 장소
-3. 초대글 문구
-4. 연락처
-5. 갤러리 사진 주소
-6. 지도 주소
-7. 계좌번호
-8. 배경음악 mp3 주소(선택)
+    <!-- 7페이지: 마음 전하실 곳 -->
+    <section class="section" id="account">
+      <div class="card">
+        <p class="eyebrow">Account</p>
+        <h2 class="title">마음 전하실 곳</h2>
+        <div class="divider"></div>
+        <p class="body">
+          축하의 마음을 전해 주실 분들을 위해<br />
+          계좌 정보를 안내드립니다.
+        </p>
+
+        <div class="account-section-group">
+          <h3 class="account-group-title">신랑측</h3>
+          <div class="account-list">
+            <div class="account-item">
+              <div class="account-name">김성휘</div>
+              <div class="account-number">은행명 000-0000-0000</div>
+            </div>
+            <div class="account-item">
+              <div class="account-name">가족 1</div>
+              <div class="account-number">은행명 000-0000-0000</div>
+            </div>
+            <div class="account-item">
+              <div class="account-name">가족 2</div>
+              <div class="account-number">은행명 000-0000-0000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-section-group">
+          <h3 class="account-group-title">신부측</h3>
+          <div class="account-list">
+            <div class="account-item">
+              <div class="account-name">김설매</div>
+              <div class="account-number">은행명 000-0000-0000</div>
+            </div>
+            <div class="account-item">
+              <div class="account-name">가족 1</div>
+              <div class="account-number">은행명 000-0000-0000</div>
+            </div>
+            <div class="account-item">
+              <div class="account-name">가족 2</div>
+              <div class="account-number">은행명 000-0000-0000</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="footer">
-      함께해 주시는 마음, 오래도록 간직하겠습니다.
-    </div>
-  </div>
+    <!-- 마지막 페이지: 인사말 -->
+    <section class="section ending" id="ending">
+      <div class="card">
+        <p class="eyebrow">Closing</p>
+        <h2 class="title">감사합니다</h2>
+        <div class="divider"></div>
+        <p class="body">
+          바쁘신 가운데 귀한 시간을 내어<br />
+          저희의 소중한 날을 함께해 주셔서 감사합니다.<br /><br />
+          두 사람 서로 아끼고 존중하며<br />
+          오래도록 따뜻한 가정을 이루겠습니다.<br /><br />
+          보내주시는 마음, 오래도록 간직하겠습니다.
+        </p>
+      </div>
+    </section>
 
-  <button class="fab-audio" id="audioToggle" aria-label="배경음악 재생 버튼">♪</button>
-
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" aria-label="닫기">×</button>
-    <img id="lightboxImg" src="" alt="확대 이미지" />
-  </div>
-
-  <!--
-    배경음악 사용 방법
-    1) music 폴더를 만들고 파일 업로드
-    2) src="music/bgm.mp3" 로 변경
-    3) 음악이 필요 없으면 아래 audio 태그를 삭제
-  -->
-  <audio id="bgm" loop>
-    <!-- <source src="music/bgm.mp3" type="audio/mpeg" /> -->
-  </audio>
-
-  <script>
-    const copyButtons = document.querySelectorAll('.copy-btn');
-    copyButtons.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const text = btn.dataset.copy;
-        try {
-          await navigator.clipboard.writeText(text);
-          const old = btn.textContent;
-          btn.textContent = '복사됨';
-          setTimeout(() => btn.textContent = old, 1200);
-        } catch (e) {
-          alert('복사에 실패했습니다. 직접 길게 눌러 복사해 주세요.');
-        }
-      });
-    });
-
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
-
-    document.querySelectorAll('.gallery button').forEach(button => {
-      button.addEventListener('click', () => {
-        lightboxImg.src = button.dataset.full;
-        lightbox.classList.add('open');
-        lightbox.setAttribute('aria-hidden', 'false');
-      });
-    });
-
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      lightboxImg.src = '';
-    }
-
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    const bgm = document.getElementById('bgm');
-    const audioToggle = document.getElementById('audioToggle');
-    let playing = false;
-
-    audioToggle.addEventListener('click', async () => {
-      try {
-        if (!playing) {
-          await bgm.play();
-          playing = true;
-          audioToggle.textContent = '❚❚';
-        } else {
-          bgm.pause();
-          playing = false;
-          audioToggle.textContent = '♪';
-        }
-      } catch (err) {
-        alert('배경음악 파일을 연결한 뒤 사용할 수 있습니다.');
-      }
-    });
-  </script>
+    <div class="footer-space"></div>
+  </main>
 </body>
 </html>
